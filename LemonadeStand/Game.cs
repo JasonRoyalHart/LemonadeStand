@@ -22,7 +22,6 @@ namespace LemonadeStand
         public void StartGame()
         {
             PrintWelcomeText();
-//            MakeCustomers(10);
             GameLoop();
         }
 
@@ -50,9 +49,15 @@ namespace LemonadeStand
                         inventory.DisplayInventory();
                         player.DisplayCash();
                         break;
+                    case "recipe":
+                    case "r":
+                        player.DisplayRecipe();
+                        player.GetChangeRecipe();
+                        break;
                     case "day":
                         break;
                     case "quit":
+                    case "q":
                         playing = false;
                         break;
                 }
