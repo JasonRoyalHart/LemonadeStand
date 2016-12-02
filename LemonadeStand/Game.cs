@@ -3,19 +3,84 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace LemonadeStand
 {
     class Game
     {
-        public void StartGame()
+
+        List<Customer> customers = new List<Customer>();
+        Inventory inventory = new Inventory();
+        Store store = new Store();
+        Player player = new Player();
+        public Game()
         {
-            printWelcomeText();
+
         }
 
-        public void printWelcomeText()
+        public void StartGame()
+        {
+            PrintWelcomeText();
+//            MakeCustomers(10);
+            GameLoop();
+        }
+
+        public void PrintWelcomeText()
         {
             Console.WriteLine("Welcome to Lemonade Stand.");
+        }
+
+        public void GameLoop()
+        {
+            bool playing = true;
+            while (playing)
+            {
+                Console.WriteLine("Choose buy, inventory, recipe, day, help or quit.");
+                string choice = Console.ReadLine().ToLower();
+                switch (choice)
+                {
+                    case "buy":
+                    case "b":
+                        store.Buy(inventory.inventory, player);
+                        break;
+                    case "inventory":
+                    case "inv":
+                    case "i":
+                        inventory.DisplayInventory();
+                        player.DisplayCash();
+                        break;
+                    case "day":
+                        break;
+                    case "quit":
+                        playing = false;
+                        break;
+                }
+            }
+        }
+
+        public void MakeCustomers(int numberOfCustomers)
+        {
+            for (int i = 0; i < numberOfCustomers; i++)
+            {
+                Customer customer = MakeCustomer();
+                customers.Add(customer);
+                Thread.Sleep(20);
+            }
+        }
+        public void DisplayCustomers()
+        {
+            foreach (Customer customer in customers)
+            {
+                Console.WriteLine("Name: {0} Thirst: {1} Cash: {2}",customer.GetName(), customer.GetThirst(), customer.GetCash());
+            }
+        }
+        public Customer MakeCustomer()
+        {
+            Customer customer = new Customer();
+            customer.Randomize();
+//            Console.WriteLine("Made customer named {0} with thirst {1}.",customer.GetName(),customer.GetThirst());
+            return customer;
         }
     }
 }

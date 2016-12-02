@@ -8,5 +8,8 @@ namespace LemonadeStand
 {
     class Weather
     {
+        int Temperature;
+        int Cloudiness;
+        int RainLevel;
     }
 }

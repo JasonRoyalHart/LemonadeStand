@@ -8,5 +8,153 @@ namespace LemonadeStand
 {
     class Store
     {
+        Dictionary<string, double> costs = new Dictionary<string, double>();
+        bool chosen;
+        public Store()
+        {
+            costs.Add("lemons", 1.5);
+            costs.Add("sugar", 1);
+            costs.Add("cups", .5);
+            costs.Add("ice", .25);
+        }
+        public void Buy(Dictionary<string, int> inventory, Player player)
+        {
+            DisplayPrices();
+            DisplayCash(player.cash);
+            GetBuyChoice(inventory, player);
+        }
+        public void DisplayPrices()
+        {
+            foreach (KeyValuePair<string, double> kvp in costs)
+            {
+                Console.WriteLine("{0}: ${1}", kvp.Key, kvp.Value);
+            }
+        }
+        public void DisplayCash(double cash)
+        {
+            Console.WriteLine("You have ${0}.",cash);
+        }
+        public void GetBuyChoice (Dictionary<string, int> inventory, Player player)
+        {
+            Console.WriteLine("What would you like to buy?");
+            string choice = Console.ReadLine().ToLower();
+            chosen = false;
+            switch (choice)
+            {
+                case "lemons":
+                case "lemon":
+                case "l":
+                    while (!chosen)
+                    {
+                        TryToBuy(player, inventory, "lemons");
+                    }
+                    break;
+                case "ice":
+                case "i":
+                    while (!chosen)
+                    {
+                        TryToBuy(player, inventory, "ice");
+                    }
+                    break;
+                case "sugar":
+                case "s":
+                    while (!chosen)
+                    {
+                        TryToBuy(player, inventory, "sugar");
+                    }
+                    break;
+                case "cups":
+                case "cup":
+                case "c":
+                    while (!chosen)
+                    {
+                        TryToBuy(player, inventory, "cups");
+                    }
+                    break;
+            }
+        }
+        public void TryToBuy(Player player, Dictionary<string, int> inventory, string toBuy)
+        {
+            int converted;
+            DisplayHowManyToBuy(toBuy);
+            string number = Console.ReadLine();
+            bool result = Int32.TryParse(number, out converted);
+            if (result)
+            {
+                if (converted > 0)
+                {
+                    double cost = (costs[toBuy] * converted);
+                    if (cost <= player.cash)
+                    {
+                        DisplayYouBought(toBuy, converted);
+                        player.cash -= cost;
+                        inventory[toBuy] += converted;
+                        chosen = true;
+                    }
+                    else
+                    {
+                        DisplayYouCantBuy(toBuy, converted);
+                        chosen = true;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a number greater than zero.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Please enter a number greater than zero.");
+            }
+        }
+
+        public void DisplayHowManyToBuy(string toBuy)
+        {
+            if (toBuy == "lemons" || toBuy == "cups")
+            {
+                Console.WriteLine("How many {0} would you like to buy?", toBuy);
+            }
+            else if (toBuy == "sugar")
+            {
+                Console.WriteLine("How many sugar cubes would you like to buy?");
+            }
+            else if (toBuy == "ice")
+            {
+                Console.WriteLine("How many ice cubes would you like to buy?");
+            }
+        }
+        public void DisplayYouBought(string toBuy, int howMany)
+        {
+            if (toBuy == "lemons" || toBuy == "cups")
+            {
+                Console.WriteLine("You buy {0} {1}.", howMany, toBuy);
+            }
+            else if (toBuy == "sugar")
+            {
+                Console.WriteLine("You buy {0} sugar cubes.", howMany);
+            }
+            else if (toBuy == "ice")
+            {
+                Console.WriteLine("You buy {0} ice cubes.", howMany);
+            }
+        }
+        public void DisplayYouCantBuy(string toBuy, int howMany)
+        {
+            if (toBuy == "lemons" || toBuy == "cups")
+            {
+                Console.WriteLine("You don't have enough money to buy {0} {1}.", howMany, toBuy);
+            }
+            else if (toBuy == "sugar")
+            {
+                Console.WriteLine("You don't have enough money to buy {0} sugar cubes.", howMany);
+            }
+            else if (toBuy == "ice")
+            {
+                Console.WriteLine("You don't have enough money to buy {0} ice cubes.", howMany);
+            }
+        }
     }
 }
+
+
+
