@@ -11,10 +11,12 @@ namespace LemonadeStand
         string name;
         public double cash;
         public Dictionary<string, int> recipe = new Dictionary<string, int>();
+        public double price;
 
         public Player()
         {
             cash = 10;
+            price = 0;
             recipe.Add("lemons", 0);
             recipe.Add("sugar", 0);
             recipe.Add("ice", 0);
@@ -87,6 +89,37 @@ namespace LemonadeStand
             {
                 Console.WriteLine("Please enter 0 or a positive number.");
                 ChangeItem(item);
+            }
+        }
+        public void DisplayPrice()
+        {
+            Console.WriteLine("You currently charge ${0} for a cup of lemonade.", price);
+        }
+
+        public void GetChangePrice()
+        {
+            double converted;
+            Console.WriteLine("Enter your new price.");
+            string newPrice = Console.ReadLine();
+            bool result = Double.TryParse(newPrice, out converted);
+            
+            if (result)
+            {
+                if (converted > 0)
+                {
+                    Console.WriteLine("You now charge ${0} for a cup of lemonade.",converted);
+                    price = converted;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a number higher than 0.");
+                    GetChangePrice();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Please enter a number higher than 0.");
+                GetChangePrice();
             }
         }
     }

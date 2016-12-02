@@ -23,10 +23,10 @@ namespace LemonadeStand
         {
             thirst = customerRandom.Next(1, 34) + customerRandom.Next(1, 34) + customerRandom.Next(1, 35);
             cash = customerRandom.Next(1, 3) + customerRandom.Next(1, 3) + customerRandom.Next(0, 4);
-            string[] firstNames = new string[20] { "Bruce","Ada","Donald","Margaret","Morgan","Hillary","Tony","Mary","Scott","Gina","Jason", "June", "Robert", "Maxine", "Phil", "Alicia", "Simon", "Rose", "Bee", "Christine" };
-            string[] lastNames = new string[20] { "Wayne","Lovelace","Thatcher","Johnson","Clinton","Trump","Kenyon","Glick","Basche", "Pedriana", "Hart", "Smith", "Jones", "Grimaldi", "LaMarr", "Stevens", "Freeman", "Jameson", "Forman", "Baletto" };
-            string firstName = firstNames[customerRandom.Next(0, 20)];
-            string lastName = lastNames[customerRandom.Next(0, 20)];
+            string[] firstNames = new string[24] {"Ned","Catelyn","Bill","Grace", "Bruce","Ada","Donald","Margaret","Morgan","Hillary","Tony","Mary","Scott","Gina","Jason", "June", "Robert", "Maxine", "Phil", "Alicia", "Simon", "Rose", "Bee", "Christine" };
+            string[] lastNames = new string[24] {"Stark","Lannister","Hopper","Sands","Wayne","Lovelace","Thatcher","Johnson","Clinton","Trump","Kenyon","Glick","Basche", "Pedriana", "Hart", "Smith", "Jones", "Grimaldi", "LaMarr", "Stevens", "Freeman", "Jameson", "Forman", "Baletto" };
+            string firstName = firstNames[customerRandom.Next(0, 24)];
+            string lastName = lastNames[customerRandom.Next(0, 24)];
             name = firstName + " " + lastName;
         }
         public string GetName()

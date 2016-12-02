@@ -9,11 +9,12 @@ namespace LemonadeStand
 {
     class Game
     {
-
         List<Customer> customers = new List<Customer>();
         Inventory inventory = new Inventory();
         Store store = new Store();
         Player player = new Player();
+        Day day = new Day();
+
         public Game()
         {
 
@@ -35,7 +36,7 @@ namespace LemonadeStand
             bool playing = true;
             while (playing)
             {
-                Console.WriteLine("Choose buy, inventory, recipe, day, help or quit.");
+                Console.WriteLine("Choose buy, inventory, recipe, price, day, help or quit.");
                 string choice = Console.ReadLine().ToLower();
                 switch (choice)
                 {
@@ -54,7 +55,14 @@ namespace LemonadeStand
                         player.DisplayRecipe();
                         player.GetChangeRecipe();
                         break;
+                    case "price":
+                    case "p":
+                        player.DisplayPrice();
+                        player.GetChangePrice();
+                        break;
                     case "day":
+                    case "d":
+                        day.StartDay(inventory, player);
                         break;
                     case "quit":
                     case "q":
