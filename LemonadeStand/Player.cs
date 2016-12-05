@@ -12,6 +12,10 @@ namespace LemonadeStand
         public double cash;
         public Dictionary<string, int> recipe = new Dictionary<string, int>();
         public double price;
+        public double moneySpentToday;
+        public double moneyEarnedToday;
+        public double totalMoneySpent;
+        public double totalMoneyEarned;
 
         public Player()
         {
@@ -20,6 +24,7 @@ namespace LemonadeStand
             recipe.Add("lemons", 1);
             recipe.Add("sugar", 1);
             recipe.Add("ice", 1);
+            moneyEarnedToday = moneySpentToday = totalMoneyEarned = totalMoneySpent = 0;
         }
         public double GetCash()
         {
@@ -28,6 +33,14 @@ namespace LemonadeStand
         public void AdjustCash(double amount)
         {
             cash += amount;
+        }
+        public void AdjustMoneySpentToday(double amount)
+        {
+            moneySpentToday += amount;
+        }
+        public void AdjustTotalMoneySpent(double amount)
+        {
+            totalMoneySpent += amount;
         }
         public double GetPrice()
         {
@@ -40,6 +53,10 @@ namespace LemonadeStand
         public void SetName(string playerName)
         {
             name = playerName;
+        }
+        public void ResetMoneySpent()
+        {
+            moneySpentToday = 0;
         }
         public void DisplayRecipe ()
         {

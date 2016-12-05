@@ -122,7 +122,7 @@ namespace LemonadeStand
                     case "day":
                     case "d":
                         day.StartDay(inventory, player, this, weatherForecast[0]);
-                        day.EndDay(this);
+                        day.EndDay(this, player);
                         break;
                     case "weather":
                     case "w":
@@ -152,10 +152,11 @@ namespace LemonadeStand
         {
             return currentDay;
         }
-        public void ChangeDay()
+        public void ChangeDay(Player player)
         {
             weatherForecast.RemoveAt(0);
             currentDay++;
+            player.ResetMoneySpent();
             if (currentDay == numberOfDays + 1)
             {
                 playing = false;

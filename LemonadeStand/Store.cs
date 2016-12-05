@@ -88,6 +88,8 @@ namespace LemonadeStand
                     {
                         DisplayYouBought(toBuy, converted);
                         player.AdjustCash(cost*-1);
+                        player.AdjustMoneySpentToday(cost);
+                        player.AdjustTotalMoneySpent(cost);
                         switch (toBuy)
                         {
                             case "lemons":

@@ -92,8 +92,28 @@ namespace LemonadeStand
 
             }
             Console.WriteLine("Day {0} is complete.",game.GetCurrentDay());
+            Console.WriteLine("You spent {0} today.", player.moneySpentToday);
             Console.WriteLine("You had a total income of {0}",dailyIncome);
-
+            if (dailyIncome - player.moneySpentToday >= 0)
+            {
+                Console.WriteLine("Your profit today was {0}", dailyIncome - player.moneySpentToday);
+            }
+            else
+            {
+                Console.WriteLine("Your loss today was {0}", dailyIncome - player.moneySpentToday);
+            }
+            player.totalMoneySpent += player.moneySpentToday;
+            player.totalMoneyEarned += dailyIncome;
+            Console.WriteLine("You have spent {0} total.", player.totalMoneySpent);
+            Console.WriteLine("You have total income of {0}", player.totalMoneyEarned);
+            if (player.totalMoneyEarned - player.totalMoneySpent >= 0)
+            {
+                Console.WriteLine("Your total profit is {0}", player.totalMoneyEarned - player.totalMoneySpent);
+            }
+            else
+            {
+                Console.WriteLine("Your total loss is {0}", player.totalMoneyEarned - player.totalMoneySpent);
+            }
 
 
         }
@@ -196,9 +216,9 @@ namespace LemonadeStand
                 Console.WriteLine("Current time: {0}:{1} {2}", hour, minutes, amPm);
             }
     }
-        public void EndDay (Game game)
+        public void EndDay (Game game, Player player)
         {
-            game.ChangeDay();
+            game.ChangeDay(player);
         }
         }
 }
