@@ -15,19 +15,27 @@ namespace LemonadeStand
 
         public Player()
         {
-            cash = 10;
+            cash = 100;
             price = 0;
-            recipe.Add("lemons", 0);
-            recipe.Add("sugar", 0);
-            recipe.Add("ice", 0);
+            recipe.Add("lemons", 1);
+            recipe.Add("sugar", 1);
+            recipe.Add("ice", 1);
         }
         public double GetCash()
         {
             return cash;
         }
+        public double GetPrice()
+        {
+            return price;
+        }
         public void DisplayCash()
         {
             Console.WriteLine("You have ${0}.",cash);
+        }
+        public void SetName(string playerName)
+        {
+            name = playerName;
         }
         public void DisplayRecipe ()
         {

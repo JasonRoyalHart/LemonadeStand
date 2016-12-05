@@ -12,22 +12,52 @@ namespace LemonadeStand
         int thirst;
         string name;
         int cash;
+        int sweetness;
         Random customerRandom = new Random();
         public Customer()
         {
             thirst = 0;
             name = "Default name";
             cash = 0;
+            sweetness = 0;
         }
         public void Randomize()
         {
-            thirst = customerRandom.Next(1, 34) + customerRandom.Next(1, 34) + customerRandom.Next(1, 35);
+            thirst = customerRandom.Next(10, 34) + customerRandom.Next(10, 34) + customerRandom.Next(10, 35);
+            sweetness = customerRandom.Next(1, 34) + customerRandom.Next(1, 34) + customerRandom.Next(1, 35);
             cash = customerRandom.Next(1, 3) + customerRandom.Next(1, 3) + customerRandom.Next(0, 4);
-            string[] firstNames = new string[24] {"Ned","Catelyn","Bill","Grace", "Bruce","Ada","Donald","Margaret","Morgan","Hillary","Tony","Mary","Scott","Gina","Jason", "June", "Robert", "Maxine", "Phil", "Alicia", "Simon", "Rose", "Bee", "Christine" };
-            string[] lastNames = new string[24] {"Stark","Lannister","Hopper","Sands","Wayne","Lovelace","Thatcher","Johnson","Clinton","Trump","Kenyon","Glick","Basche", "Pedriana", "Hart", "Smith", "Jones", "Grimaldi", "LaMarr", "Stevens", "Freeman", "Jameson", "Forman", "Baletto" };
-            string firstName = firstNames[customerRandom.Next(0, 24)];
-            string lastName = lastNames[customerRandom.Next(0, 24)];
+            string[] firstNames = new string[26] {"Homer","Marge","Ned","Catelyn","Bill","Grace", "Bruce","Ada","Donald","Margaret","Morgan","Hillary","Tony","Mary","Scott","Gina","Jason", "June", "Robert", "Maxine", "Phil", "Alicia", "Simon", "Rose", "Bee", "Christine" };
+            string[] lastNames = new string[26] {"Simpson","Flanders","Stark","Lannister","Hopper","Sands","Wayne","Lovelace","Thatcher","Johnson","Clinton","Trump","Kenyon","Glick","Basche", "Pedriana", "Hart", "Smith", "Jones", "Grimaldi", "LaMarr", "Stevens", "Freeman", "Jameson", "Forman", "Baletto" };
+            string firstName = firstNames[customerRandom.Next(0, 26)];
+            string lastName = lastNames[customerRandom.Next(0, 26)];
             name = firstName + " " + lastName;
+        }
+        public bool WillBuy(Player player, Weather weather)
+        {
+            double costThreshold = cash / 3;
+            double afterTemp = 1+ ((weather.GetTemperature() - 84.0)/100.0);
+            costThreshold = costThreshold * afterTemp;
+            if (player.GetPrice() > costThreshold)
+            {
+                Console.WriteLine("{0} says, 'Your lemonade is too expensive.'", name);
+                return false;
+            }
+            else
+            {
+                Thread.Sleep(20);
+                int buyRoll = customerRandom.Next(1,100);
+                if (buyRoll <= (thirst*afterTemp))
+                {
+                    Console.WriteLine("{0} says, 'I'll take one lemonade please.'", name);
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("{0} says, 'I'm just not thirsty enough to buy a lemonade right now.'",name);
+                    return false;
+                }
+            }
+
         }
         public string GetName()
         {

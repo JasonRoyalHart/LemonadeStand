@@ -8,10 +8,6 @@ namespace LemonadeStand
 {
     class Inventory
     {
-        int lemons;
-        int sugar;
-        int cups;
-        int ice;
 
         public Dictionary<string, int> inventory = new Dictionary<string, int>();
         public Inventory()
@@ -33,7 +29,14 @@ namespace LemonadeStand
         {
             return inventory;
         }
-
+        public void UseCup()
+        {
+            inventory["cups"]--;
+        }
+        public int GetCups()
+        {
+            return inventory["cups"];
+        }
 
     }
 }
