@@ -10,32 +10,61 @@ namespace LemonadeStand
     {
 
         public Dictionary<string, int> inventory = new Dictionary<string, int>();
+        public List<Lemon> lemonInventory;
+        public List<Ice> iceInventory;
+        public List<Cup> cupInventory;
+        public List<Sugar> sugarInventory;
+
         public Inventory()
         {
-            inventory.Add("lemons", 0);
-            inventory.Add("sugar", 0);
-            inventory.Add("cups", 0);
-            inventory.Add("ice", 0);
+            lemonInventory = new List<Lemon>();
+            iceInventory = new List<Ice>();
+            cupInventory = new List<Cup>();
+            sugarInventory = new List<Sugar>();
         }
 
         public void DisplayInventory()
         {
-            Console.WriteLine("You have {0} lemons.", inventory["lemons"]);
-            Console.WriteLine("You have {0} sugar cubes.", inventory["sugar"]);
-            Console.WriteLine("You have {0} cups.", inventory["cups"]);
-            Console.WriteLine("You have {0} ice cubes.", inventory["ice"]);
-        }
-        public Dictionary<string, int> GetInventory()
-        {
-            return inventory;
+            Console.WriteLine("You have {0} lemons.", lemonInventory.Count());
+            Console.WriteLine("You have {0} sugar cubes.", sugarInventory.Count());
+            Console.WriteLine("You have {0} cups.", cupInventory.Count());
+            Console.WriteLine("You have {0} ice cubes.", iceInventory.Count());
         }
         public void UseCup()
         {
-            inventory["cups"]--;
+            cupInventory.RemoveAt(0);
+        }
+        public void UseLemon()
+        {
+            lemonInventory.RemoveAt(0);
+        }
+        public void UseSugar()
+        {
+            sugarInventory.RemoveAt(0);
+        }
+        public void UseIce()
+        {
+            iceInventory.RemoveAt(0);
         }
         public int GetCups()
         {
-            return inventory["cups"];
+            return cupInventory.Count();
+        }
+        public void AddLemon(Lemon lemon)
+        {
+            lemonInventory.Add(lemon);
+        }
+        public void AddSugar(Sugar sugar)
+        {
+            sugarInventory.Add(sugar);
+        }
+        public void AddCup(Cup cup)
+        {
+            cupInventory.Add(cup);
+        }
+        public void AddIce(Ice ice)
+        {
+            iceInventory.Add(ice);
         }
 
     }

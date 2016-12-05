@@ -16,7 +16,7 @@ namespace LemonadeStand
         public Player()
         {
             cash = 100;
-            price = 0;
+            price = .1;
             recipe.Add("lemons", 1);
             recipe.Add("sugar", 1);
             recipe.Add("ice", 1);
@@ -24,6 +24,10 @@ namespace LemonadeStand
         public double GetCash()
         {
             return cash;
+        }
+        public void AdjustCash(double amount)
+        {
+            cash += amount;
         }
         public double GetPrice()
         {
@@ -130,6 +134,7 @@ namespace LemonadeStand
                 GetChangePrice();
             }
         }
+
     }
 
 }

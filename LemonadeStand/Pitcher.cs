@@ -43,9 +43,18 @@ namespace LemonadeStand
         public void FillPitcher(Inventory inventory, Player player)
         {
             full = 100;
-            inventory.inventory["lemons"] -= player.recipe["lemons"];
-            inventory.inventory["sugar"] -= player.recipe["sugar"];
-            inventory.inventory["ice"] -= player.recipe["ice"];
+            for (int i = 0; i < player.recipe["lemons"];i++)
+            {
+                inventory.UseLemon();
+            }
+            for (int i = 0; i < player.recipe["sugar"]; i++)
+            {
+                inventory.UseSugar();
+            }
+            for (int i = 0; i < player.recipe["ice"]; i++)
+            {
+                inventory.UseIce();
+            }
             Console.WriteLine("You make a fresh pitcher of lemonade.");
         }
     }

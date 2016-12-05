@@ -62,19 +62,28 @@ namespace LemonadeStand
                 }
                 else
                 {
-                    Console.WriteLine("Please enter 0 or a positive number.");
+                    Console.WriteLine("Please a positive number.");
                     GetDays();
                 }
             }
             else
             {
-                Console.WriteLine("Please enter 0 or a positive number.");
+                Console.WriteLine("Please enter a positive number.");
                 GetDays();
             }
         }
         public void SetWeather()
         {
-            for (int i = 0; i < numberOfDays; i++)
+            int weatherDays;
+            if (numberOfDays < 7)
+            {
+                weatherDays = 7;
+            }
+            else
+            {
+                weatherDays = numberOfDays;
+            }
+            for (int i = 0; i < weatherDays; i++)
             {
                 Weather weather = new Weather();
                 weather.Randomize();
@@ -92,7 +101,7 @@ namespace LemonadeStand
                 {
                     case "buy":
                     case "b":
-                        store.Buy(inventory.inventory, player);
+                        store.Buy(inventory.inventory, player, inventory);
                         break;
                     case "inventory":
                     case "inv":
@@ -117,7 +126,7 @@ namespace LemonadeStand
                         break;
                     case "weather":
                     case "w":
-                        weather.WeatherReport(weatherForecast);
+                        weather.WeatherCheck(weatherForecast);
                         break;
                     case "quit":
                     case "q":

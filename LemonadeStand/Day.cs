@@ -22,6 +22,15 @@ namespace LemonadeStand
             int timePeriod = 1;
             Pitcher pitcher = new Pitcher(player);
             dailyIncome = 0;
+            if (dayRandom.Next(0,100) <= weather.GetRain())
+            {
+                isRaining = true;
+                Console.WriteLine("It is raining.");
+            }
+            else
+            {
+                isRaining = false;
+            }
             if (CheckRecipe(inventory, player))
             {
                 pitcher.FillPitcher(inventory, player);
@@ -37,7 +46,7 @@ namespace LemonadeStand
                 Console.WriteLine("You're out of cups! You can't sell any lemonade today.");
                 dayNotOver = false;
             }
-            while (timePeriod <= 32 && dayNotOver)
+            while (timePeriod <= 16 && dayNotOver)
             {
                 if (pitcher.GetFull() == 0)
                 {
@@ -62,6 +71,19 @@ namespace LemonadeStand
                 {
                     Thread.Sleep(3000);
                     DisplayTime(timePeriod);
+                    if (dayRandom.Next(0, 100) <= weather.GetRain())
+                    {
+                        isRaining = true;
+                        Console.WriteLine("It is raining.");
+                    }
+                    else
+                    {
+                        if (isRaining)
+                        {
+                            Console.WriteLine("It has stopped raining.");
+                        }
+                        isRaining = false;
+                    }
                     CheckForCustomer(player, pitcher, inventory, weather);
 
                 }
@@ -78,7 +100,7 @@ namespace LemonadeStand
 
         public bool CheckRecipe(Inventory inventory, Player player)
         {
-            if (CheckItem(inventory, player, "lemons") && CheckItem(inventory, player, "sugar") && CheckItem(inventory, player, "ice")) {
+            if (CheckLemons(inventory, player) && CheckSugar(inventory, player) && CheckIce(inventory, player)) {
                 return true;
             }
             else
@@ -86,23 +108,49 @@ namespace LemonadeStand
                 return false;
             }
         }
-        public bool CheckItem(Inventory inventory, Player player, string item)
+        public bool CheckLemons(Inventory inventory, Player player)
         {
-            if (inventory.inventory[item] < player.recipe[item])
-            {
-                Console.WriteLine("You don't have enough {0} to make a pitcher!", item);
-                return false;
-            }
-            else
+            if (player.recipe["lemons"] < inventory.lemonInventory.Count())
             {
                 return true;
             }
+            else
+            {
+                Console.WriteLine("You don't have enough lemons to make a pitcher!");
+                return false;
+            }
         }
+        public bool CheckSugar(Inventory inventory, Player player)
+        {
+            if (player.recipe["sugar"] < inventory.sugarInventory.Count())
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("You don't have enough sugar to make a pitcher!");
+                return false;
+            }
+        }
+        public bool CheckIce(Inventory inventory, Player player)
+        {
+            if (player.recipe["ice"] < inventory.iceInventory.Count())
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("You don't have enough ice to make a pitcher!");
+                return false;
+            }
+        }
+
+
         public void CheckForCustomer(Player player, Pitcher pitcher, Inventory inventory, Weather weather)
         {
             Thread.Sleep(20);
             int chance = dayRandom.Next(0, 100);
-            if (chance <= 90)
+            if (chance <= 90 && !isRaining)
             {
                 Customer customer = new Customer();
                 customer.Randomize();
@@ -151,8 +199,6 @@ namespace LemonadeStand
         public void EndDay (Game game)
         {
             game.ChangeDay();
-            
-
         }
         }
 }

@@ -17,11 +17,11 @@ namespace LemonadeStand
             costs.Add("cups", .5);
             costs.Add("ice", .25);
         }
-        public void Buy(Dictionary<string, int> inventory, Player player)
+        public void Buy(Dictionary<string, int> storeInventory, Player player, Inventory inventory)
         {
             DisplayPrices();
             DisplayCash(player.cash);
-            GetBuyChoice(inventory, player);
+            GetBuyChoice(storeInventory, player, inventory);
         }
         public void DisplayPrices()
         {
@@ -34,7 +34,7 @@ namespace LemonadeStand
         {
             Console.WriteLine("You have ${0}.",cash);
         }
-        public void GetBuyChoice (Dictionary<string, int> inventory, Player player)
+        public void GetBuyChoice (Dictionary<string, int> storeInventory, Player player, Inventory inventory)
         {
             Console.WriteLine("What would you like to buy?");
             string choice = Console.ReadLine().ToLower();
@@ -46,21 +46,21 @@ namespace LemonadeStand
                 case "l":
                     while (!chosen)
                     {
-                        TryToBuy(player, inventory, "lemons");
+                        TryToBuy(player, storeInventory, "lemons", inventory);
                     }
                     break;
                 case "ice":
                 case "i":
                     while (!chosen)
                     {
-                        TryToBuy(player, inventory, "ice");
+                        TryToBuy(player, storeInventory, "ice", inventory);
                     }
                     break;
                 case "sugar":
                 case "s":
                     while (!chosen)
                     {
-                        TryToBuy(player, inventory, "sugar");
+                        TryToBuy(player, storeInventory, "sugar", inventory);
                     }
                     break;
                 case "cups":
@@ -68,12 +68,12 @@ namespace LemonadeStand
                 case "c":
                     while (!chosen)
                     {
-                        TryToBuy(player, inventory, "cups");
+                        TryToBuy(player, storeInventory, "cups", inventory);
                     }
                     break;
             }
         }
-        public void TryToBuy(Player player, Dictionary<string, int> inventory, string toBuy)
+        public void TryToBuy(Player player, Dictionary<string, int> storeInventory, string toBuy, Inventory inventory)
         {
             int converted;
             DisplayHowManyToBuy(toBuy);
@@ -87,8 +87,38 @@ namespace LemonadeStand
                     if (cost <= player.cash)
                     {
                         DisplayYouBought(toBuy, converted);
-                        player.cash -= cost;
-                        inventory[toBuy] += converted;
+                        player.AdjustCash(cost*-1);
+                        switch (toBuy)
+                        {
+                            case "lemons":
+                                for (int i = 0; i < converted; i++)
+                                {
+                                    Lemon boughtLemon = new Lemon();
+                                    inventory.AddLemon(boughtLemon);
+                                }
+                                break;
+                            case "ice":
+                                for (int i = 0; i < converted; i++)
+                                {
+                                    Ice boughtIce = new Ice();
+                                    inventory.AddIce(boughtIce);
+                                }
+                                break;
+                            case "sugar":
+                                for (int i = 0; i < converted; i++)
+                                {
+                                    Sugar boughtSugar = new Sugar();
+                                    inventory.AddSugar(boughtSugar);
+                                }
+                                break;
+                            case "cups":
+                                for (int i = 0; i < converted; i++)
+                                {
+                                    Cup boughtCup = new Cup();
+                                    inventory.AddCup(boughtCup);
+                                }
+                                break;
+                        }
                         chosen = true;
                     }
                     else
