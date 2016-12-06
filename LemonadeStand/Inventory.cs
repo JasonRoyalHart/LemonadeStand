@@ -108,6 +108,11 @@ namespace LemonadeStand
             ResetIce();
             ResetCups();
         }
+        public void MeltIce()
+        {
+            Console.WriteLine("All your ice has melted.");
+            ResetIce();
+        }
         public void AddLemons(int amount)
         {
             for (int i = 0; i < amount; i++)

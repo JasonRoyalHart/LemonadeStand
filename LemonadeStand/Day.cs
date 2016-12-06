@@ -218,6 +218,7 @@ namespace LemonadeStand
         public void EndDay (Game game, Player player, Inventory inventory)
         {
             inventory.GrowLemons();
+            inventory.MeltIce();
             game.ChangeDay(player);
         }
         }
