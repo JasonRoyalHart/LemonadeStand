@@ -8,12 +8,13 @@ namespace LemonadeStand
 {
     class Inventory
     {
-
-        public Dictionary<string, int> inventory = new Dictionary<string, int>();
         public List<Lemon> lemonInventory;
         public List<Ice> iceInventory;
         public List<Cup> cupInventory;
         public List<Sugar> sugarInventory;
+        public List<Tree> treeInventory;
+        Random inventoryRandom = new Random();
+        public Dictionary<string, int> inventory = new Dictionary<string, int>();
 
         public Inventory()
         {
@@ -21,6 +22,7 @@ namespace LemonadeStand
             iceInventory = new List<Ice>();
             cupInventory = new List<Cup>();
             sugarInventory = new List<Sugar>();
+            treeInventory = new List<Tree>();
         }
 
         public void DisplayInventory()
@@ -29,6 +31,7 @@ namespace LemonadeStand
             Console.WriteLine("You have {0} sugar cubes.", sugarInventory.Count());
             Console.WriteLine("You have {0} cups.", cupInventory.Count());
             Console.WriteLine("You have {0} ice cubes.", iceInventory.Count());
+            Console.WriteLine("You have {0} lemon trees.", treeInventory.Count());
         }
         public void UseCup()
         {
@@ -77,6 +80,10 @@ namespace LemonadeStand
         public void AddIce(Ice ice)
         {
             iceInventory.Add(ice);
+        }
+        public void AddTree(Tree tree)
+        {
+            treeInventory.Add(tree);
         }
         public void ResetLemons()
         {
@@ -133,6 +140,25 @@ namespace LemonadeStand
                 AddSugar(addSugar);
             }
         }
-
+        public void AddTrees(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Tree addTree = new Tree();
+                AddTree(addTree);
+            }
+        }
+        public void GrowLemons()
+        {
+            if (lemonInventory.Count() > 0)
+            {
+                foreach (Tree tree in treeInventory)
+                {
+                    int numberOfLemons = inventoryRandom.Next(1, 4);
+                    Console.WriteLine("Your lemon tree grew {0} lemons today.",numberOfLemons);
+                    AddLemons(numberOfLemons);
+                }
+            }
+        }
     }
 }

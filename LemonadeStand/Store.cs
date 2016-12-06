@@ -12,10 +12,11 @@ namespace LemonadeStand
         bool chosen;
         public Store()
         {
-            costs.Add("lemons", 1.5);
-            costs.Add("sugar", 1);
-            costs.Add("cups", .5);
-            costs.Add("ice", .25);
+            costs.Add("lemons", .8);
+            costs.Add("sugar", .25);
+            costs.Add("cups", .1);
+            costs.Add("ice", .05);
+            costs.Add("trees", 25);
         }
         public void Buy(Dictionary<string, int> storeInventory, Player player, Inventory inventory)
         {
@@ -71,6 +72,16 @@ namespace LemonadeStand
                         TryToBuy(player, storeInventory, "cups", inventory);
                     }
                     break;
+                case "tree":
+                case "t":
+                    while (!chosen)
+                    {
+                        TryToBuy(player, storeInventory, "trees", inventory);
+                    }
+                    break;
+                default:
+                    GetBuyChoice(storeInventory, player, inventory);
+                    break;
             }
         }
         public void TryToBuy(Player player, Dictionary<string, int> storeInventory, string toBuy, Inventory inventory)
@@ -104,6 +115,9 @@ namespace LemonadeStand
                             case "cups":
                                 inventory.AddCups(converted);
                                 break;
+                            case "trees":
+                                inventory.AddTrees(converted);
+                                break;
                         }
                         chosen = true;
                     }
@@ -126,7 +140,7 @@ namespace LemonadeStand
 
         public void DisplayHowManyToBuy(string toBuy)
         {
-            if (toBuy == "lemons" || toBuy == "cups")
+            if (toBuy == "lemons" || toBuy == "cups" || toBuy == "trees")
             {
                 Console.WriteLine("How many {0} would you like to buy?", toBuy);
             }
@@ -141,7 +155,7 @@ namespace LemonadeStand
         }
         public void DisplayYouBought(string toBuy, int howMany)
         {
-            if (toBuy == "lemons" || toBuy == "cups")
+            if (toBuy == "lemons" || toBuy == "cups" || toBuy == "trees")
             {
                 Console.WriteLine("You buy {0} {1}.", howMany, toBuy);
             }
@@ -156,7 +170,7 @@ namespace LemonadeStand
         }
         public void DisplayYouCantBuy(string toBuy, int howMany)
         {
-            if (toBuy == "lemons" || toBuy == "cups")
+            if (toBuy == "lemons" || toBuy == "cups" || toBuy == "trees")
             {
                 Console.WriteLine("You don't have enough money to buy {0} {1}.", howMany, toBuy);
             }

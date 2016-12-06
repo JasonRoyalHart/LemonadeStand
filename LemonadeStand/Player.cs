@@ -10,7 +10,7 @@ namespace LemonadeStand
     {
         string name;
         public double cash;
-        public Dictionary<string, int> recipe = new Dictionary<string, int>();
+        public Dictionary<string, int> recipe;
         public double price;
         public double moneySpentToday;
         public double moneyEarnedToday;
@@ -21,6 +21,7 @@ namespace LemonadeStand
         {
             cash = 100;
             price = .1;
+            recipe = new Dictionary<string, int>();
             recipe.Add("lemons", 1);
             recipe.Add("sugar", 1);
             recipe.Add("ice", 1);
@@ -82,6 +83,10 @@ namespace LemonadeStand
         {
             totalMoneyEarned = amount;
         }
+        public double GetMoneySpentToday()
+        {
+            return moneySpentToday;
+        }
         public void DisplayRecipe ()
         {
             Console.WriteLine("In each pitcher of lemonade, you currently put:");
@@ -108,9 +113,6 @@ namespace LemonadeStand
                     Console.WriteLine("Please answer yes or no.");
                     GetChangeRecipe();
                     break;
-
-
-
             }
         }
         public void ChangeRecipe()
@@ -118,6 +120,10 @@ namespace LemonadeStand
             ChangeItem("lemons");
             ChangeItem("sugar");
             ChangeItem("ice");
+        }
+        public void adjustTotalMoneySpent(double moneySpentToday)
+        {
+            totalMoneySpent += moneySpentToday;
         }
         public void ChangeItem(string item)
         {

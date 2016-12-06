@@ -47,7 +47,6 @@ namespace LemonadeStand
                 Thread.Sleep(20);
                 int buyRoll = customerRandom.Next(1,100);
                 double cheapPrice = 1;
-                Console.WriteLine("Cash: {0}",cash);
                 if (player.GetPrice() < cash/6)
                 {
                     Console.WriteLine("{0} says, 'How cheap!'",name);
@@ -60,7 +59,7 @@ namespace LemonadeStand
                 }
                 else
                 {
-                    Console.WriteLine("{0} says, 'I'm just not thirsty enough to buy a lemonade right now.'",name);
+                    Console.WriteLine("{0} says, 'I'm just not thirsty enough to buy a lemonade right now.'\n",name);
                     return false;
                 }
             }

@@ -69,7 +69,7 @@ namespace LemonadeStand
                 }
                 if (!outOfLemonade && !outOfCups)
                 {
-                    Thread.Sleep(3000);
+                    Thread.Sleep(2000);
                     DisplayTime(timePeriod);
                     if (dayRandom.Next(0, 100) <= weather.GetRain())
                     {
@@ -92,17 +92,16 @@ namespace LemonadeStand
 
             }
             Console.WriteLine("Day {0} is complete.",game.GetCurrentDay());
-            Console.WriteLine("You spent {0} today.", player.moneySpentToday);
+            Console.WriteLine("You spent {0} today.", player.GetMoneySpentToday());
             Console.WriteLine("You had a total income of {0}",dailyIncome);
-            if (dailyIncome - player.moneySpentToday >= 0)
+            if (dailyIncome - player.GetMoneySpentToday() >= 0)
             {
-                Console.WriteLine("Your profit today was {0}", dailyIncome - player.moneySpentToday);
+                Console.WriteLine("Your profit today was {0}", dailyIncome - player.GetMoneySpentToday());
             }
             else
             {
-                Console.WriteLine("Your loss today was {0}", dailyIncome - player.moneySpentToday);
+                Console.WriteLine("Your loss today was {0}", dailyIncome - player.GetMoneySpentToday());
             }
-            player.totalMoneySpent += player.moneySpentToday;
             player.totalMoneyEarned += dailyIncome;
             Console.WriteLine("You have spent {0} total.", player.totalMoneySpent);
             Console.WriteLine("You have total income of {0}", player.totalMoneyEarned);
@@ -174,20 +173,20 @@ namespace LemonadeStand
             {
                 Customer customer = new Customer();
                 customer.Randomize();
-                Console.WriteLine("{0} walks by your stand.", customer.GetName());
+                Console.WriteLine("\n{0} walks by your stand.", customer.GetName());
                 if (customer.WillBuy(player, weather))
                 {
-                    player.cash += player.price;
+                    player.cash += player.GetPrice();
                     pitcher.AdjustFull(-10);
                     inventory.UseCup();
-                    dailyIncome += player.price;                    
-                    Console.WriteLine("You made ${0} and your pitcher is {1}% full.", player.price, pitcher.GetFull());
-                    Console.WriteLine("Current money: ${0}. Current number of cups: {1}", player.GetCash(), inventory.GetCups());
+                    dailyIncome += player.GetPrice();                    
+                    Console.WriteLine("You made ${0} and your pitcher is {1}% full.", player.GetPrice(), pitcher.GetFull());
+                    Console.WriteLine("Current money: ${0}. Current number of cups: {1}\n", player.GetCash(), inventory.GetCups());
                 }
             }
             else
             {
-                Console.WriteLine("There are no customers right now.");
+                Console.WriteLine("\nThere are no customers right now.\n");
             }
         }
         public void DisplayTime(int timePeriod)
@@ -216,8 +215,9 @@ namespace LemonadeStand
                 Console.WriteLine("Current time: {0}:{1} {2}", hour, minutes, amPm);
             }
     }
-        public void EndDay (Game game, Player player)
+        public void EndDay (Game game, Player player, Inventory inventory)
         {
+            inventory.GrowLemons();
             game.ChangeDay(player);
         }
         }

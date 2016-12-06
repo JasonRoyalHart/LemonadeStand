@@ -11,14 +11,14 @@ namespace LemonadeStand
     {
         int numberOfDays;
         int currentDay;
-        List<Customer> customers = new List<Customer>();
-        List<Weather> weatherForecast = new List<Weather>();
-        Inventory inventory = new Inventory();
-        Store store = new Store();
-        Player player = new Player();
-        Day day = new Day();
-        Weather weather = new Weather();
-        FileWriter fileWriter = new FileWriter();
+        List<Customer> customers;
+        List<Weather> weatherForecast;
+        Inventory inventory;
+        Store store;
+        Player player;
+        Day day;
+        Weather weather;
+        FileWriter fileWriter;
         FileReader fileReader = new FileReader();
         bool playing;
 
@@ -26,6 +26,14 @@ namespace LemonadeStand
         {
             currentDay = 1;
             playing = true;
+            customers = new List<Customer>();
+            weatherForecast = new List<Weather>();
+            inventory = new Inventory();
+            store = new Store();
+            player = new Player();
+            day = new Day();
+            weather = new Weather();
+            fileWriter = new FileWriter();
         }
 
         public void StartGame()
@@ -129,7 +137,7 @@ namespace LemonadeStand
                     case "day":
                     case "d":
                         day.StartDay(inventory, player, this, weatherForecast[0]);
-                        day.EndDay(this, player);
+                        day.EndDay(this, player, inventory);
                         break;
                     case "weather":
                     case "w":
