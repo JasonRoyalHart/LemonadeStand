@@ -93,32 +93,16 @@ namespace LemonadeStand
                         switch (toBuy)
                         {
                             case "lemons":
-                                for (int i = 0; i < converted; i++)
-                                {
-                                    Lemon boughtLemon = new Lemon();
-                                    inventory.AddLemon(boughtLemon);
-                                }
+                                inventory.AddLemons(converted);
                                 break;
                             case "ice":
-                                for (int i = 0; i < converted; i++)
-                                {
-                                    Ice boughtIce = new Ice();
-                                    inventory.AddIce(boughtIce);
-                                }
+                                inventory.AddIces(converted);
                                 break;
                             case "sugar":
-                                for (int i = 0; i < converted; i++)
-                                {
-                                    Sugar boughtSugar = new Sugar();
-                                    inventory.AddSugar(boughtSugar);
-                                }
+                                inventory.AddSugars(converted);
                                 break;
                             case "cups":
-                                for (int i = 0; i < converted; i++)
-                                {
-                                    Cup boughtCup = new Cup();
-                                    inventory.AddCup(boughtCup);
-                                }
+                                inventory.AddCups(converted);
                                 break;
                         }
                         chosen = true;

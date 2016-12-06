@@ -50,6 +50,18 @@ namespace LemonadeStand
         {
             return cupInventory.Count();
         }
+        public int GetLemons()
+        {
+            return lemonInventory.Count();
+        }
+        public int GetSugar()
+        {
+            return sugarInventory.Count();
+        }
+        public int GetIce()
+        {
+            return iceInventory.Count();
+        }
         public void AddLemon(Lemon lemon)
         {
             lemonInventory.Add(lemon);
@@ -65,6 +77,61 @@ namespace LemonadeStand
         public void AddIce(Ice ice)
         {
             iceInventory.Add(ice);
+        }
+        public void ResetLemons()
+        {
+            lemonInventory.Clear();
+        }
+        public void ResetIce()
+        {
+            iceInventory.Clear();
+        }
+        public void ResetSugar()
+        {
+            sugarInventory.Clear();
+        }
+        public void ResetCups()
+        {
+            cupInventory.Clear();
+        }
+        public void Reset()
+        {
+            ResetLemons();
+            ResetSugar();
+            ResetIce();
+            ResetCups();
+        }
+        public void AddLemons(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Lemon addLemon = new Lemon();
+                AddLemon(addLemon);
+            }
+        }
+        public void AddIces(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Ice addIce = new Ice();
+                AddIce(addIce);
+            }
+        }
+        public void AddCups(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Cup addCup = new Cup();
+                AddCup(addCup);
+            }
+        }
+        public void AddSugars(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Sugar addSugar = new Sugar();
+                AddSugar(addSugar);
+            }
         }
 
     }

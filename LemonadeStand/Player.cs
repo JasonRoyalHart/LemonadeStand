@@ -30,6 +30,18 @@ namespace LemonadeStand
         {
             return cash;
         }
+        public void SetCash(double amount)
+        {
+            cash = amount;
+        }
+        public double GetTotalSpent()
+        {
+            return totalMoneySpent;
+        }
+        public double GetTotalProfit()
+        {
+            return totalMoneyEarned;
+        }
         public void AdjustCash(double amount)
         {
             cash += amount;
@@ -46,6 +58,10 @@ namespace LemonadeStand
         {
             return price;
         }
+        public string GetName()
+        {
+            return name;
+        }
         public void DisplayCash()
         {
             Console.WriteLine("You have ${0}.",cash);
@@ -57,6 +73,14 @@ namespace LemonadeStand
         public void ResetMoneySpent()
         {
             moneySpentToday = 0;
+        }
+        public void SetTotalSpent(int amount)
+        {
+            totalMoneySpent = amount;
+        }
+        public void SetTotalProfit(int amount)
+        {
+            totalMoneyEarned = amount;
         }
         public void DisplayRecipe ()
         {

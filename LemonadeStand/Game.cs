@@ -18,6 +18,8 @@ namespace LemonadeStand
         Player player = new Player();
         Day day = new Day();
         Weather weather = new Weather();
+        FileWriter fileWriter = new FileWriter();
+        FileReader fileReader = new FileReader();
         bool playing;
 
         public Game()
@@ -45,6 +47,11 @@ namespace LemonadeStand
         {
             Console.WriteLine("What is your name?");
             player.SetName(Console.ReadLine());
+        }
+
+        public void SetCurrentDay(int day)
+        {
+            currentDay = day;
         }
 
         public void GetDays()
@@ -95,7 +102,7 @@ namespace LemonadeStand
         {
             while (playing)
             {
-                Console.WriteLine("Day {0}: Choose buy, inventory, recipe, price, day, weather, help or quit.", currentDay);
+                Console.WriteLine("Day {0}: Choose buy, inventory, recipe, price, day, weather, save, load, help or quit.", currentDay);
                 string choice = Console.ReadLine().ToLower();
                 switch (choice)
                 {
@@ -127,6 +134,14 @@ namespace LemonadeStand
                     case "weather":
                     case "w":
                         weather.WeatherCheck(weatherForecast);
+                        break;
+                    case "save":
+                    case "s":
+                        fileWriter.WriteFile(player, inventory, this);
+                        break;
+                    case "load":
+                    case "l":
+                        fileReader.ReadFile(player, inventory, this);
                         break;
                     case "quit":
                     case "q":
