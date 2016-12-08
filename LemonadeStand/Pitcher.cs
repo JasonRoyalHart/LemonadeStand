@@ -10,6 +10,7 @@ namespace LemonadeStand
     {
         int full;
         int sweetness;
+        int sourness;
 
         public Pitcher(Player player)
         {
@@ -21,14 +22,19 @@ namespace LemonadeStand
             }
             for (int lemons = 0; lemons < player.recipe["lemons"]; lemons++)
             {
-                sweetness -= 25;
+                sourness += 25;
             }
             for (int ice = 0; ice < player.recipe["ice"]; ice++)
             {
                 sweetness -= 1;
+                sourness -= 1;
             }
         }
         public int GetSweetness()
+        {
+            return sweetness;
+        }
+        public int GetSourness()
         {
             return sweetness;
         }

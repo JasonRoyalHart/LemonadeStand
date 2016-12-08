@@ -12,6 +12,12 @@ namespace LemonadeStand
         Random dayRandom = new Random();
         double dailyIncome;
         bool isRaining;
+        int numberOfTimePeriods;
+
+        public Day()
+        {
+            numberOfTimePeriods = 16;
+        }
 
         public void StartDay(Inventory inventory, Player player, Game game, Weather weather)
         {
@@ -46,7 +52,7 @@ namespace LemonadeStand
                 Console.WriteLine("You're out of cups! You can't sell any lemonade today.");
                 dayNotOver = false;
             }
-            while (timePeriod <= 16 && dayNotOver)
+            while (timePeriod <= numberOfTimePeriods && dayNotOver)
             {
                 if (pitcher.GetFull() == 0)
                 {
@@ -93,28 +99,26 @@ namespace LemonadeStand
             }
             Console.WriteLine("Day {0} is complete.",game.GetCurrentDay());
             Console.WriteLine("You spent {0} today.", player.GetMoneySpentToday());
-            Console.WriteLine("You had a total income of {0}",dailyIncome);
+            Console.WriteLine("You had a total income of {0}.",dailyIncome);
             if (dailyIncome - player.GetMoneySpentToday() >= 0)
             {
-                Console.WriteLine("Your profit today was {0}", dailyIncome - player.GetMoneySpentToday());
+                Console.WriteLine("Your profit today was {0}.", dailyIncome - player.GetMoneySpentToday());
             }
             else
             {
-                Console.WriteLine("Your loss today was {0}", dailyIncome - player.GetMoneySpentToday());
+                Console.WriteLine("Your loss today was {0}.", dailyIncome - player.GetMoneySpentToday());
             }
             player.totalMoneyEarned += dailyIncome;
             Console.WriteLine("You have spent {0} total.", player.totalMoneySpent);
-            Console.WriteLine("You have total income of {0}", player.totalMoneyEarned);
+            Console.WriteLine("You have total income of {0}.", player.totalMoneyEarned);
             if (player.totalMoneyEarned - player.totalMoneySpent >= 0)
             {
-                Console.WriteLine("Your total profit is {0}", player.totalMoneyEarned - player.totalMoneySpent);
+                Console.WriteLine("Your total profit is {0}.", player.totalMoneyEarned - player.totalMoneySpent);
             }
             else
             {
-                Console.WriteLine("Your total loss is {0}", player.totalMoneyEarned - player.totalMoneySpent);
+                Console.WriteLine("Your total loss is {0}.", player.totalMoneyEarned - player.totalMoneySpent);
             }
-
-
         }
 
         public bool CheckRecipe(Inventory inventory, Player player)
@@ -174,20 +178,28 @@ namespace LemonadeStand
                 Customer customer = new Customer();
                 customer.Randomize();
                 Console.WriteLine("\n{0} walks by your stand.", customer.GetName());
-                if (customer.WillBuy(player, weather))
+                if (customer.WillBuy(player, weather, pitcher))
                 {
-                    player.cash += player.GetPrice();
-                    pitcher.AdjustFull(-10);
-                    inventory.UseCup();
-                    dailyIncome += player.GetPrice();                    
-                    Console.WriteLine("You made ${0} and your pitcher is {1}% full.", player.GetPrice(), pitcher.GetFull());
-                    Console.WriteLine("Current money: ${0}. Current number of cups: {1}\n", player.GetCash(), inventory.GetCups());
+                    BuyCup(player, pitcher, inventory);
+                    if (customer.DetermineIfCustomerWillBuyAgain(pitcher)) {
+                        Console.WriteLine("{0} says, 'I'll take another cup please!'", customer.GetName());
+                        BuyCup(player, pitcher, inventory);
+                    }
                 }
             }
             else
             {
                 Console.WriteLine("\nThere are no customers right now.\n");
             }
+        }
+        public void BuyCup(Player player, Pitcher pitcher, Inventory inventory)
+        {
+            player.cash += player.GetPrice();
+            pitcher.AdjustFull(-10);
+            inventory.UseCup();
+            dailyIncome += player.GetPrice();
+            Console.WriteLine("You made ${0} and your pitcher is {1}% full.", player.GetPrice(), pitcher.GetFull());
+            Console.WriteLine("Current money: ${0}. Current number of cups: {1}\n", player.GetCash(), inventory.GetCups());
         }
         public void DisplayTime(int timePeriod)
         {

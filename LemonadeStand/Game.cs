@@ -53,7 +53,7 @@ namespace LemonadeStand
 
         public void GetName(Player player)
         {
-            Console.WriteLine("What is your name?");
+            Console.Write("What is your name? ");
             player.SetName(Console.ReadLine());
         }
 
@@ -64,7 +64,7 @@ namespace LemonadeStand
 
         public void GetDays()
         {
-            Console.WriteLine("How many days would you like to play for?");
+            Console.Write("How many days would you like to play for? ");
             string playerDays = Console.ReadLine();
             int converted;
             bool result = Int32.TryParse(playerDays, out converted);
@@ -110,7 +110,7 @@ namespace LemonadeStand
         {
             while (playing)
             {
-                Console.WriteLine("Day {0}: Choose buy, inventory, recipe, price, day, weather, save, load, help or quit.", currentDay);
+                Console.WriteLine("Day {0}: Choose buy, inventory, recipe, price, day, weather, save, load, or quit.", currentDay);
                 string choice = Console.ReadLine().ToLower();
                 switch (choice)
                 {
@@ -156,13 +156,6 @@ namespace LemonadeStand
                         playing = false;
                         break;
                 }
-            }
-        }
-        public void DisplayCustomers()
-        {
-            foreach (Customer customer in customers)
-            {
-                Console.WriteLine("Name: {0} Thirst: {1} Cash: {2}",customer.GetName(), customer.GetThirst(), customer.GetCash());
             }
         }
         public Customer MakeCustomer()
