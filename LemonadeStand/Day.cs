@@ -16,7 +16,7 @@ namespace LemonadeStand
 
         public Day()
         {
-            numberOfTimePeriods = 16;
+            numberOfTimePeriods = 32;
         }
 
         public void StartDay(Inventory inventory, Player player, Game game, Weather weather)
@@ -54,7 +54,7 @@ namespace LemonadeStand
             }
             while (timePeriod <= numberOfTimePeriods && dayNotOver)
             {
-                if (pitcher.GetFull() == 0)
+                if (pitcher.GetFull() <= 0)
                 {
                     if (CheckRecipe(inventory, player))
                     {
