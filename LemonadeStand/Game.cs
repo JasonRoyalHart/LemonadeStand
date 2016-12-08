@@ -39,7 +39,7 @@ namespace LemonadeStand
         public void StartGame()
         {
             PrintWelcomeText();
-            GetName(player);
+            GetName();
             GetDays();
             SetWeather();
             GameLoop();
@@ -51,7 +51,7 @@ namespace LemonadeStand
             Console.WriteLine("Welcome to Lemonade Stand.");
         }
 
-        public void GetName(Player player)
+        public void GetName()
         {
             Console.Write("What is your name? ");
             player.SetName(Console.ReadLine());
@@ -77,7 +77,7 @@ namespace LemonadeStand
                 }
                 else
                 {
-                    Console.WriteLine("Please a positive number.");
+                    Console.WriteLine("Please enter a positive number.");
                     GetDays();
                 }
             }
@@ -90,9 +90,9 @@ namespace LemonadeStand
         public void SetWeather()
         {
             int weatherDays;
-            if (numberOfDays < 7)
+            if (numberOfDays < 14)
             {
-                weatherDays = 7;
+                weatherDays = 14;
             }
             else
             {
@@ -181,6 +181,8 @@ namespace LemonadeStand
         public void EndGame()
         {
             Console.WriteLine("Game over.");
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
         }
     }
 }
