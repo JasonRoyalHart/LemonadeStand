@@ -75,7 +75,7 @@ namespace LemonadeStand
         {
             moneySpentToday = 0;
         }
-        public void SetTotalSpent(int amount)
+        public void SetTotalSpent(double amount)
         {
             totalMoneySpent = amount;
         }

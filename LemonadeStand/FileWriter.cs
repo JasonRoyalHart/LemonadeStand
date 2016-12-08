@@ -32,7 +32,10 @@ namespace LemonadeStand
             catch
             {
                 Console.WriteLine("Error while saving.");
+
             }
+
         }
     }
 }
+

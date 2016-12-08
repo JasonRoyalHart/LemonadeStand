@@ -25,7 +25,7 @@ namespace LemonadeStand
         {
             thirst = customerRandom.Next(10, 34) + customerRandom.Next(10, 34) + customerRandom.Next(10, 35);
             sweetness = customerRandom.Next(1, 34) + customerRandom.Next(1, 34) + customerRandom.Next(1, 35);
-            cash = customerRandom.Next(1, 3) + customerRandom.Next(1, 3) + customerRandom.Next(0, 4);
+            cash = customerRandom.Next(1, 5) + customerRandom.Next(1, 5) + customerRandom.Next(1, 5);
             string[] firstNames = new string[30] {"Bernie","Barbara","George","Tina","Homer","Marge","Ned","Catelyn","Bill","Grace", "Bruce","Ada","Donald","Margaret","Morgan","Hillary","Tony","Mary","Scott","Gina","Jason", "June", "Robert", "Maxine", "Phil", "Alicia", "Simon", "Rose", "Bee", "Christine" };
             string[] lastNames = new string[30] {"Sanders","Bush","Turner","Washington","Simpson","Flanders","Stark","Lannister","Hopper","Sands","Wayne","Lovelace","Thatcher","Johnson","Clinton","Trump","Kenyon","Glick","Basche", "Pedriana", "Hart", "Smith", "Jones", "Grimaldi", "LaMarr", "Stevens", "Freeman", "Jameson", "Forman", "Baletto" };
             string firstName = firstNames[customerRandom.Next(0, 30)];
@@ -50,7 +50,7 @@ namespace LemonadeStand
                 if (player.GetPrice() < cash/6)
                 {
                     Console.WriteLine("{0} says, 'How cheap!'",name);
-                    cheapPrice = 1 + (cash / 6);
+                    cheapPrice = 1 + (cash / 5);
                 }
                 if (buyRoll <= (thirst*afterTemp*cheapPrice))
                 {
