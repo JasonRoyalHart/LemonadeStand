@@ -133,7 +133,7 @@ namespace LemonadeStand
         }
         public bool CheckLemons(Inventory inventory, Player player)
         {
-            if (player.recipe["lemons"] < inventory.lemonInventory.Count())
+            if (player.recipe["lemons"] <= inventory.lemonInventory.Count())
             {
                 return true;
             }
@@ -145,7 +145,7 @@ namespace LemonadeStand
         }
         public bool CheckSugar(Inventory inventory, Player player)
         {
-            if (player.recipe["sugar"] < inventory.sugarInventory.Count())
+            if (player.recipe["sugar"] <= inventory.sugarInventory.Count())
             {
                 return true;
             }
@@ -157,7 +157,7 @@ namespace LemonadeStand
         }
         public bool CheckIce(Inventory inventory, Player player)
         {
-            if (player.recipe["ice"] < inventory.iceInventory.Count())
+            if (player.recipe["ice"] <= inventory.iceInventory.Count())
             {
                 return true;
             }

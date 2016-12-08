@@ -89,15 +89,7 @@ namespace LemonadeStand
         }
         public void SetWeather()
         {
-            int weatherDays;
-            if (numberOfDays < 14)
-            {
-                weatherDays = 14;
-            }
-            else
-            {
-                weatherDays = numberOfDays;
-            }
+            int weatherDays = numberOfDays + 7;
             for (int i = 0; i < weatherDays; i++)
             {
                 Weather weather = new Weather();
