@@ -59,9 +59,11 @@ namespace LemonadeStand
             switch (weatherChoice)
             {
                 case "day":
+                case "d":
                     DisplayTodaysWeather(weatherForecast);
                     break;
                 case "week":
+                case "w":
                     WeatherReport(weatherForecast);
                     break;
                 default:

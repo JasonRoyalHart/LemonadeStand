@@ -1,0 +1,8 @@
+Two examples of using SOLID design:
+
+1) Single Responsibility Principle. Used throughout. You can trace the code down from program and see that I've made each function do only one thing and do it well. A good example of this is CheckRecipe in the Day class. CheckRecipe
+checks your ingredients to see if you have enough of each to make a pitcher. However, I felt that checking three things was too much for one function to do. I broke CheckRecipe down into CheckLemons, CheckIce and CheckSugar. Each one
+checks your inventory to see if you have enough if the particular ingredient, prints a message if you don't have enough, and returns a bool value indicating whether or not you have enough of that ingredient.
+
+2) Open/Closed Principle. Because lemons, sugar, ice, cups and lemon trees are classes, functionality can be easily added to each class. If lemons need to rot or cups break or whatever, it will be easier to expand the classes.
+If these were variables instead of classes, these would be much more difficult to extend. 
