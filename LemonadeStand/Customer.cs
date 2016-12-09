@@ -75,7 +75,7 @@ namespace LemonadeStand
         {
             return thirst;
         }
-        public int GetCash()
+        public double GetCash()
         {
             return cash;
         }
